@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Training</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body style="padding: 50px">
+	<h1>Gym Planner</h1>
+	<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+
+    <table class="table table-striped">
+		<tr>
+		    <th>Id</th>
+		    <th>Name</th>
+		    <th>Duration</th>
+		    <th>Date and time</th>
+		    <th>Coach</th>
+		    <th sec:authorize="hasAuthority('ADMIN')"> </th>
+		    <th sec:authorize="hasAuthority('ADMIN')"> </th>
+		</tr>  
+    	<tr th:each = "training : ${trainings}">
+    		<td th:text="${training.id}"></td>
+    		<td th:text="${training.name}"></td>		
+	    	<td th:text="${training.duration}"></td>
+	    	<td th:text="${training.date}"></td>
+			<td th:text="${training.coach.name}"></td>
+
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${training.id})}" class="btn btn-danger">Delete</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${training.id})}" class="btn btn-success">Edit</a></td>
+
+	
+    	</tr>
+     </table>  	
+     <a href="/add" class="btn btn-info">Add Training</a>
+</body>
+</html>

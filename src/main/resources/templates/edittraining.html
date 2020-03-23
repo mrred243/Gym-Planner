@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Training</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Edit training</h1>
+	<div>
+		<form th:object="${training}" th:action="@{../save}" action="#" method="post">
+			<input type="hidden" th:field="*{id}" class="form-control"/>			
+			<label for="name">Name</label>
+			<input type="text" id="name" th:field="*{name}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="duration">Duration</label>
+			<input type="text" id="duration" th:field="*{duration}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="time">Date and time</label>
+			<input type="text" id="datetime" th:field="*{date}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="catelist">Coach</label>
+			<select id=
+				"coachlist" 
+				th:field="*{coach}" class="form-control">
+			<option th:each="coach: ${coaches}"
+			th:value="${coach.coachId}"
+			th:text="${coach.name}"></option>
+			</select>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" value="Save"></input>
+
+			</select>
+
+		</form>
+	</div>
+</body>
+</html>
